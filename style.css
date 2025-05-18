@@ -1,0 +1,237 @@
+/* General reset & fonts */
+body, html {
+  margin: 0; padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #121212;
+  color: #eee;
+  min-height: 100vh;
+}
+
+/* Fixed navbar */
+.navbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  background: #0f2027;
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  padding: 1rem 0;
+  z-index: 1000;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.7);
+}
+
+.navbar a {
+  color: #f0a500;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: color 0.3s ease;
+}
+
+.navbar a:hover {
+  color: #fff;
+}
+
+/* Content container with padding to avoid nav overlap */
+.page-container {
+  max-width: 900px;
+  margin: 6rem auto 2rem;
+  padding: 0 1rem;
+}
+
+/* Auth pages */
+.auth-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+}
+
+.auth-container {
+  background: #1a1a2e;
+  padding: 2rem 3rem;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.8);
+  width: 320px;
+  text-align: center;
+}
+
+.auth-container h2 {
+  color: #f0a500;
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+}
+
+.auth-container input {
+  width: 100%;
+  margin-bottom: 1rem;
+  padding: 0.5rem 0.75rem;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  outline: none;
+  background: #27293d;
+  color: #eee;
+  transition: background-color 0.3s ease;
+}
+
+.auth-container input:focus {
+  background: #3a3c5a;
+}
+
+.auth-container button {
+  background: #f0a500;
+  border: none;
+  padding: 0.75rem;
+  width: 100%;
+  border-radius: 5px;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  color: black;
+  transition: background-color 0.3s ease;
+}
+
+.auth-container button:hover {
+  background: #c18d00;
+}
+
+.auth-container a {
+  display: block;
+  margin-top: 1rem;
+  color: #ccc;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: color 0.3s ease;
+}
+
+.auth-container a:hover {
+  color: #f0a500;
+}
+
+/* Games grid */
+.games-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.game-card {
+  background: #0f3460;
+  padding: 1.5rem;
+  color: #f0a500;
+  border-radius: 10px;
+  border: 1px solid #222;
+  text-align: center;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  user-select: none;
+}
+
+.game-card:hover {
+  background: #16213e;
+  transform: scale(1.05);
+}
+
+/* Result box */
+.game-result-box {
+  margin-top: 2rem;
+  padding: 1rem;
+  background: #1a1a2e;
+  border: 1px solid #333;
+  border-radius: 8px;
+  color: #eee;
+  font-size: 1.1rem;
+  min-height: 3rem;
+}
+
+/* Wallet & Referral content */
+.wallet-summary, .referral-section {
+  background: #1a1a2e;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.6);
+}
+
+/* Simple table style for wallet */
+.wallet-summary table {
+  width: 100%;
+  border-collapse: collapse;
+  color: #eee;
+}
+
+.wallet-summary th, .wallet-summary td {
+  border: 1px solid #333;
+  padding: 0.75rem 1rem;
+  text-align: left;
+}
+
+.wallet-summary th {
+  background: #0f2027;
+}
+
+/* Referral tree */
+.tree-node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  background: #27293d;
+  border-radius: 8px;
+  margin: 0.5rem;
+  color: #f0a500;
+  font-weight: 600;
+}
+
+.tree-children {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .games-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .auth-container {
+    width: 90%;
+    padding: 2rem 1.5rem;
+  }
+}
+
+
+
+.wallet-actions {
+  margin-top: 2rem;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.wallet-actions button {
+  background: #f0a500;
+  color: #121212;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px #f0a50099;
+}
+
+.wallet-actions button:hover {
+  background: #ffd700;
+  box-shadow: 0 0 15px #f0a500;
+  transform: scale(1.05);
+}

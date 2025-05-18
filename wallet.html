@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Wallet Summary - Crypto Casino</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+  <nav class="navbar">
+    <a href="wallet.html">Wallet</a>
+    <a href="referral.html">Referrals</a>
+    <a href="games.html">Games</a>
+    <a href="login.html" id="logout-link">Logout</a>
+  </nav>
+
+  <div class="page-container">
+    <h2>Your Wallet Summary</h2>
+    <div class="wallet-summary" id="wallet-summary"></div>
+    <!-- Blockchain Buttons -->
+  <div class="wallet-actions">
+  <button onclick="depositToCasino('0.01')">💰 Deposit 0.01 ETH</button>
+  <button onclick="withdrawFromCasino('0.01')">⬅️ Withdraw 0.01 ETH</button>
+  <button onclick="checkCasinoBalance()">📊 Check ETH Balance</button>
+</div>
+
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    document.getElementById('logout-link').onclick = (e) => {
+      e.preventDefault();
+      logoutUser();
+    };
+    checkAuth();
+    loadWalletSummary();
+  </script>
+</body>
+</html>

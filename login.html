@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Login - Crypto Casino</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="auth-page">
+  <div class="auth-container">
+    <h2>Login</h2>
+    <input type="text" id="login-id" placeholder="User ID" />
+    <input type="password" id="login-password" placeholder="Password" />
+    <input type="text" id="login-wallet" placeholder="Wallet Address" />
+    <button id="login-btn">Login</button>
+    <a href="index.html">Don't have an account? Register</a>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    document.getElementById('login-btn').onclick = () => {
+      const id = document.getElementById('login-id').value.trim();
+      const password = document.getElementById('login-password').value.trim();
+      const wallet = document.getElementById('login-wallet').value.trim();
+      loginUser(id, password, wallet);
+    };
+  </script>
+</body>
+</html>

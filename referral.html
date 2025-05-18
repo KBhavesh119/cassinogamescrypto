@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Referral Tree - Crypto Casino</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      background: #121212;
+      color: #eee;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0; padding: 0;
+    }
+    .navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      background: #0f2027;
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      padding: 1rem 0;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.7);
+      z-index: 1000;
+    }
+    .navbar a {
+      color: #f0a500;
+      font-weight: 600;
+      text-decoration: none;
+      font-size: 1rem;
+      transition: color 0.3s ease;
+    }
+    .navbar a:hover {
+      color: #fff;
+    }
+    .page-container {
+      padding: 6rem 1rem 2rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    h2 {
+      color: #f0a500;
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    /* Referral Tree Styles */
+    #referral-tree {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 2rem;
+      user-select: none;
+    }
+
+    .tree-node {
+      background: #1a1a2e;
+      border: 2px solid #f0a500;
+      border-radius: 10px;
+      padding: 1rem 1.5rem;
+      color: #f0a500;
+      font-weight: 700;
+      text-align: center;
+      cursor: pointer;
+      box-shadow: 0 0 10px #f0a500aa;
+      position: relative;
+      min-width: 120px;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+    .tree-node:hover {
+      background: #f0a500;
+      color: #121212;
+      transform: scale(1.05);
+      box-shadow: 0 0 20px #f0a500;
+    }
+    .tree-node.selected {
+      background: #ffc107;
+      color: #121212;
+      box-shadow: 0 0 25px #ffc107cc;
+      transform: scale(1.1);
+    }
+
+    .tree-children {
+      margin-top: 2rem;
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      position: relative;
+    }
+
+    /* Connector lines */
+    .tree-children::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 2px;
+      height: 2rem;
+      background: #f0a500;
+      transform: translateX(-50%);
+      z-index: 0;
+    }
+    .tree-node:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      top: -2rem;
+      right: -1.5rem;
+      width: 1.5rem;
+      height: 2px;
+      background: #f0a500;
+      z-index: 0;
+    }
+    .tree-node:last-child::after {
+      content: none;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <a href="wallet.html">Wallet</a>
+    <a href="referral.html">Referrals</a>
+    <a href="games.html">Games</a>
+    <a href="login.html" id="logout-link">Logout</a>
+  </nav>
+
+  <div class="page-container">
+    <h2>Referral Network</h2>
+    <div id="referral-tree"></div>
+    <div style="margin-top: 2rem; text-align: center;">
+      <button id="add-referral-btn" style="padding: 0.75rem 1.5rem; font-weight: 700; font-size: 1rem; background:#f0a500; border:none; border-radius:6px; cursor:pointer;">
+        Add Referral
+      </button>
+    </div>
+  </div>
+
+  <script>
+    // Demo user data - replace with your currentUser from localStorage
+    let currentUser = JSON.parse(localStorage.getItem('currentUser')) || {
+      id: "rootUser",
+      referrals: [
+        {
+          id: "userA",
+          referrals: [
+            { id: "userA1", referrals: [] },
+            { id: "userA2", referrals: [] }
+          ]
+        },
+        {
+          id: "userB",
+          referrals: [
+            { id: "userB1", referrals: [] }
+          ]
+        }
+      ]
+    };
+
+    let selectedNode = null;
+
+    const treeContainer = document.getElementById('referral-tree');
+    const addReferralBtn = document.getElementById('add-referral-btn');
+
+    function renderTree() {
+      treeContainer.innerHTML = '';
+      currentUser.referrals.forEach(node => {
+        treeContainer.appendChild(createNodeElement(node));
+      });
+    }
+
+    function createNodeElement(node) {
+      const div = document.createElement('div');
+      div.classList.add('tree-node');
+      div.textContent = node.id;
+
+      if (node === selectedNode) {
+        div.classList.add('selected');
+      }
+
+      div.onclick = (e) => {
+        e.stopPropagation();
+        if (selectedNode === node) {
+          selectedNode = null;
+        } else {
+          selectedNode = node;
+        }
+        renderTree();
+      };
+
+      if (node.referrals && node.referrals.length > 0) {
+        const childrenDiv = document.createElement('div');
+        childrenDiv.classList.add('tree-children');
+        node.referrals.forEach(child => {
+          childrenDiv.appendChild(createNodeElement(child));
+        });
+        div.appendChild(childrenDiv);
+      }
+
+      return div;
+    }
+
+    addReferralBtn.onclick = () => {
+      const newId = 'user' + Math.random().toString(36).slice(2, 7);
+      const newReferral = { id: newId, referrals: [] };
+
+      if (selectedNode) {
+        selectedNode.referrals = selectedNode.referrals || [];
+        selectedNode.referrals.push(newReferral);
+      } else {
+        currentUser.referrals.push(newReferral);
+      }
+
+      // Save to localStorage
+      localStorage.setItem('currentUser', JSON.stringify(currentUser));
+
+      // Reset selection & re-render
+      selectedNode = null;
+      renderTree();
+      alert(`Added referral: ${newId}`);
+    };
+
+    document.getElementById('logout-link').onclick = (e) => {
+      e.preventDefault();
+      localStorage.removeItem('currentUser');
+      window.location.href = 'login.html';
+    };
+
+    renderTree();
+  </script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Register - Crypto Casino</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="auth-page">
+  <div class="auth-container">
+    <h2>Register</h2>
+    <input type="text" id="register-id" placeholder="User ID" />
+    <input type="text" id="register-name" placeholder="Name" />
+    <input type="password" id="register-password" placeholder="Password" />
+    <input type="text" id="register-wallet" placeholder="Wallet Address" />
+    <button id="register-btn">Register</button>
+    <a href="login.html">Already have an account? Login</a>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    document.getElementById('register-btn').onclick = () => {
+      const id = document.getElementById('register-id').value.trim();
+      const name = document.getElementById('register-name').value.trim();
+      const password = document.getElementById('register-password').value.trim();
+      const wallet = document.getElementById('register-wallet').value.trim();
+      registerUser(id, name, password, wallet);
+    };
+  </script>
+</body>
+</html>

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Casino Games - Crypto Casino</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      background: #121212;
+      color: #eee;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0; padding: 0;
+    }
+    .navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      background: #0f2027;
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      padding: 1rem 0;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.7);
+      z-index: 1000;
+    }
+    .navbar a {
+      color: #f0a500;
+      font-weight: 600;
+      text-decoration: none;
+      font-size: 1rem;
+      transition: color 0.3s ease;
+    }
+    .navbar a:hover {
+      color: #fff;
+    }
+    .page-container {
+      padding: 6rem 1rem 2rem;
+      max-width: 1000px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    h2 {
+      color: #f0a500;
+      margin-bottom: 2rem;
+    }
+
+    /* Games grid */
+    .games-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(150px,1fr));
+      gap: 1.8rem;
+      justify-items: center;
+    }
+
+    /* Game card */
+    .game-card {
+      background: #1a1a2e;
+      border: 2px solid #f0a500;
+      border-radius: 12px;
+      width: 160px;
+      padding: 1.5rem 1rem;
+      color: #f0a500;
+      font-weight: 700;
+      font-size: 1.1rem;
+      cursor: pointer;
+      box-shadow: 0 0 15px #f0a500aa;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+      user-select: none;
+      text-shadow: 0 0 5px #b38f00;
+    }
+    .game-card:hover {
+      background: #ffc107;
+      color: #121212;
+      transform: scale(1.1);
+      box-shadow: 0 0 30px #ffc107cc;
+    }
+
+    /* Icon container */
+    .game-icon {
+      font-size: 3rem;
+      margin-bottom: 0.7rem;
+      filter: drop-shadow(0 0 3px #f0a500);
+      transition: filter 0.3s ease;
+    }
+    .game-card:hover .game-icon {
+      filter: drop-shadow(0 0 6px #ffc107);
+    }
+
+    /* Result box */
+    #game-output {
+      margin-top: 3rem;
+      background: #1a1a2e;
+      border: 2px solid #f0a500;
+      border-radius: 10px;
+      padding: 1rem 1.5rem;
+      font-size: 1.2rem;
+      min-height: 3rem;
+      box-shadow: 0 0 20px #f0a500aa inset;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <a href="wallet.html">Wallet</a>
+    <a href="referral.html">Referrals</a>
+    <a href="games.html">Games</a>
+    <a href="login.html" id="logout-link">Logout</a>
+  </nav>
+
+  <div class="page-container">
+    <h2>Play Casino Games</h2>
+
+    <div class="games-grid">
+      <div class="game-card" onclick="playGame('slots')" tabindex="0" role="button" aria-label="Slots Game">
+        <div class="game-icon">🎰</div>
+        Slots
+      </div>
+      <div class="game-card" onclick="playGame('roulette')" tabindex="0" role="button" aria-label="Roulette Game">
+        <div class="game-icon">🎯</div>
+        Roulette
+      </div>
+      <div class="game-card" onclick="playGame('blackjack')" tabindex="0" role="button" aria-label="Blackjack Game">
+        <div class="game-icon">🃏</div>
+        Blackjack
+      </div>
+      <div class="game-card" onclick="playGame('dice')" tabindex="0" role="button" aria-label="Dice Game">
+        <div class="game-icon">🎲</div>
+        Dice
+      </div>
+      <div class="game-card" onclick="playGame('rps')" tabindex="0" role="button" aria-label="Rock Paper Scissors Game">
+        <div class="game-icon">✊</div>
+        Rock Paper Scissors
+      </div>
+      <div class="game-card" onclick="playGame('spinWheel')" tabindex="0" role="button" aria-label="Spin Wheel Game">
+        <div class="game-icon">🎡</div>
+        Spin Wheel
+      </div>
+      <div class="game-card" onclick="playGame('poker')" tabindex="0" role="button" aria-label="Poker Game">
+        <div class="game-icon">♠️</div>
+        Poker
+      </div>
+      <div class="game-card" onclick="playGame('baccarat')" tabindex="0" role="button" aria-label="Baccarat Game">
+        <div class="game-icon">🂡</div>
+        Baccarat
+      </div>
+      <div class="game-card" onclick="playGame('craps')" tabindex="0" role="button" aria-label="Craps Game">
+        <div class="game-icon">🎲</div>
+        Craps
+      </div>
+      <div class="game-card" onclick="playGame('keno')" tabindex="0" role="button" aria-label="Keno Game">
+        <div class="game-icon">🔢</div>
+        Keno
+      </div>
+      <div class="game-card" onclick="playGame('sicBo')" tabindex="0" role="button" aria-label="Sic Bo Game">
+        <div class="game-icon">🧊</div>
+        Sic Bo
+      </div>
+      <div class="game-card" onclick="playGame('videoPoker')" tabindex="0" role="button" aria-label="Video Poker Game">
+        <div class="game-icon">📺</div>
+        Video Poker
+      </div>
+    </div>
+
+    <div id="game-output" aria-live="polite" role="status"></div>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    document.getElementById('logout-link').onclick = (e) => {
+      e.preventDefault();
+      logoutUser();
+    };
+    checkAuth();
+  </script>
+</body>
+</html>
