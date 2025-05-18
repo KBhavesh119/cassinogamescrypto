@@ -105,3 +105,47 @@ Stored locally (can be upgraded to on-chain or backend)
 ├── Casino.sol        # Smart contract (optional to include)
 
 
+
+
+===============================================
+🎰 Casino Smart Contract - Solidity (v0.8+)
+===============================================
+
+This contract allows users to:
+- Deposit ETH to their casino balance
+- Withdraw ETH from their balance
+- Check their balance
+- All actions emit relevant events
+
+-----------------------------------------------
+📄 How It Works:
+
+1. deposit():
+   - Payable function
+   - Adds msg.value to sender's balance
+   - Emits Deposited event
+
+2. withdraw(amount):
+   - Requires sender's balance >= amount
+   - Transfers ETH back to sender
+   - Emits Withdrawn event
+
+3. getBalance(player):
+   - View function
+   - Returns balance of any address
+
+-----------------------------------------------
+🔐 Security Notes:
+- Only users can withdraw their own balance
+- Contract doesn't yet restrict owner functions
+
+-----------------------------------------------
+🛠️ Example (in JavaScript/Web3):
+
+await contract.methods.deposit().send({ from: user, value: web3.utils.toWei('0.1', 'ether') });
+await contract.methods.withdraw(web3.utils.toWei('0.05', 'ether')).send({ from: user });
+const balance = await contract.methods.getBalance(user).call();
+
+-----------------------------------------------
+📜 License:
+MIT — free to use, modify, and build upon.
